@@ -33,8 +33,8 @@ class Auth {
   /// [req] include the request headers information that use for auth.
   /// [bucket] is the name of bucket used in aliyun oss
   /// [key] is the object name in aliyun oss, alias the 'filepath/filename'
-  void sign(HttpRequest req, String bucket, String key) {
-    req.headers['x-oss-date'] = DateTime.now().toGMTString();
+  void sign(HttpRequest req, String bucket, String key, {String? time}) {
+    req.headers['x-oss-date'] = time ?? DateTime.now().toGMTString();
     req.headers['x-oss-security-token'] = secureToken;
     final String signature = _makeSignature(req, bucket, key);
     req.headers['Authorization'] = "OSS $accessKey:$signature";
