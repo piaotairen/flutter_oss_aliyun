@@ -386,6 +386,7 @@ class Client with AuthMixin, HttpMixin implements ClientApi {
     PutRequestOption? option,
     CancelToken? cancelToken,
     String? fileKey,
+    {String? time}
   }) async {
     final String bucket = option?.bucketName ?? bucketName;
     final String filename = fileKey ?? filepath.split('/').last;
@@ -416,7 +417,7 @@ class Client with AuthMixin, HttpMixin implements ClientApi {
     final String url = "https://$bucket.$endpoint/$filename";
     final HttpRequest request = HttpRequest.put(url, headers: headers);
 
-    auth.sign(request, bucket, filename);
+    auth.sign(request, bucket, filename, time: time);
 
     return _dio.put(
       request.url,
