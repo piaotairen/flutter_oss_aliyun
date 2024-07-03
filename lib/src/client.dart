@@ -386,7 +386,7 @@ class Client with AuthMixin, HttpMixin implements ClientApi {
     PutRequestOption? option,
     CancelToken? cancelToken,
     String? fileKey,
-    {String? time}
+    String? time,
   }) async {
     final String bucket = option?.bucketName ?? bucketName;
     final String filename = fileKey ?? filepath.split('/').last;
